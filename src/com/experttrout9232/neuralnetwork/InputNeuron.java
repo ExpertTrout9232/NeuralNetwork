@@ -11,9 +11,4 @@ public class InputNeuron implements NeuronBase {
     public double getValue() {
         return value;
     }
-
-    @Override
-    public void setValue(double value) {
-        this.value = value;
-    }
 }

@@ -8,11 +8,6 @@ public class Neuron implements NeuronBase {
         return value;
     }
 
-    @Override
-    public void setValue(double value) {
-        this.value = value;
-    }
-
     public void activate(ActivationFunction activationFunction) {
         value = activationFunction.activate(value);
     }
