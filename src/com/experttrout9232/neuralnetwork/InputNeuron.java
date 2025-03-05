@@ -1,5 +1,4 @@
 package com.experttrout9232.neuralnetwork;
 
-public class Layer {
-    Neuron[] neurons;
+public class InputNeuron implements INeuron {
 }
