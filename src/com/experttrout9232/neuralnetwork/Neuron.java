@@ -1,6 +1,6 @@
 package com.experttrout9232.neuralnetwork;
 
-public class Neuron implements INeuron {
+public class Neuron implements NeuronBase {
     private double value;
 
     @Override
@@ -13,7 +13,7 @@ public class Neuron implements INeuron {
         this.value = value;
     }
 
-    public void activate(Runnable activationFunction) {
-        activationFunction.run();
+    public void activate(ActivationFunction activationFunction) {
+        value = activationFunction.activate(value);
     }
 }
