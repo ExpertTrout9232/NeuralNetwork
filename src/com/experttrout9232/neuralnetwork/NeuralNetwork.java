@@ -18,4 +18,8 @@ public class NeuralNetwork {
     public void feedForward(double[] input) {
 
     }
+
+    public void train() {
+
+    }
 }
