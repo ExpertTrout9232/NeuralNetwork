@@ -7,6 +7,10 @@ public final class ActivationFunctions {
         return 1.0 / (1.0 + Math.exp(-x));
     }
 
+    public static double sigmoidDerivative(double x) {
+        return x * (1 - x);
+    }
+
     public static double relu(double x) {
         return Math.max(0, x);
     }

@@ -16,6 +16,8 @@ public class OutputLayer extends Layer {
     }
 
     public double calculateCost(int batchSize) {
-        return error / batchSize;
+        double cost = error / batchSize;
+        error = 0.0;
+        return cost;
     }
 }
