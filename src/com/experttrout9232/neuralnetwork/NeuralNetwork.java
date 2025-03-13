@@ -5,17 +5,18 @@ public class NeuralNetwork {
     private OutputLayer outputLayer;
     private Layer[] hiddenLayers;
 
-    public NeuralNetwork(int hiddenLayersCount) {
-        inputLayer = new InputLayer();
-        outputLayer = new OutputLayer();
-        hiddenLayers = new Layer[hiddenLayersCount];
+    public NeuralNetwork(NeuralNetworkConfig config) {
+        inputLayer = new InputLayer(config.inputLayerSize());
+        outputLayer = new OutputLayer(config.outputLayerSize(), config.hiddenLayerSize());
+        hiddenLayers = new Layer[config.hiddenLayerSize()];
 
-        for (int i = 0; i < hiddenLayersCount; i++) {
-            hiddenLayers[i] = new Layer();
+        hiddenLayers[0] = new Layer(config.hiddenLayerSize(), config.inputLayerSize());
+        for (int i = 1; i < config.hiddenLayersCount(); i++) {
+            hiddenLayers[i] = new Layer(config.hiddenLayerSize(), config.hiddenLayerSize());
         }
     }
 
-    public void feedForward(double[] input) {
+    public void feedforward(double[] input) {
 
     }
 
