@@ -30,15 +30,16 @@ public class NeuralNetwork {
         layersAll.add(outputLayer);
     }
 
-    public void feedforward(Double[] input) {
+    public void feedforward(Double[] input, Double[] desiredOutput) {
         inputLayer.setNeurons(input);
         for (int i = 0; i < layersProcessing.size(); i++) {
             layersProcessing.get(i).activate(layersAll.get(i), ActivationFunctions::sigmoid);
         }
+        outputLayer.calculateError(desiredOutput);
     }
 
     private void backpropagation(int batchSize, Double[] desiredOutput, double learningRate) {
-        System.out.println(outputLayer.calculateCost(batchSize));
+        // System.out.println(outputLayer.calculateCost(batchSize));
         for (int i = layersProcessing.size() - 1; i >= 0; i--) {
             Double[] error = new Double[layersProcessing.get(i).getNeurons().length];
             if (layersProcessing.get(i) instanceof OutputLayer) {
@@ -47,6 +48,7 @@ public class NeuralNetwork {
                 }
             } else {
                 for (int j = 0; j < layersProcessing.get(i).getNeurons().length; j++) {
+                    error[j] = 0.0;
                     for (int k = 0; k < layersProcessing.get(i + 1).getNeurons().length; k++) {
                         error[j] += layersProcessing.get(i + 1).getWeightsFromNeuron(k)[j] * layersProcessing.get(i + 1).getNeurons()[k].getValue();
                     }
@@ -71,7 +73,7 @@ public class NeuralNetwork {
             Dataset dataset = new Dataset((long) (Math.random() * Long.MAX_VALUE));
 
             for (int j = 0; j < dataset.getData().length; j++) {
-                feedforward(dataset.getData()[j]);
+                feedforward(dataset.getData()[j], dataset.getDesiredOutput()[j]);
                 if (j % batchSize == 0) {
                     backpropagation(batchSize, dataset.getDesiredOutput()[j], learningRate);
                 }
